@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Educa{% endblock %}</title>
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+{% load staticfiles %}
+    <link rel="stylesheet" href="{% static theme_css %}">
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Educa</a></div>
+            <ul class="nav navbar-nav pull-right">
+             {% if request.user.is_authenticated %}
+               <li><a href="{% url "logout" %}">Sign out</a></li>
+             {% else %}
+               <li><a href="{% url "login" %}">Sign in</a></li>
+             {% endif %}
+           </ul>
+    </nav>
+     <div id="content">
+       {% block content %}
+       {% endblock %}
+     </div>
+</div>
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+ <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+ <script>
+   $(document).ready(function() {
+     {% block domready %}
+     {% endblock %}
+   });
+</script>
+</body>
+</html>
